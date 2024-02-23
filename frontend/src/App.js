@@ -1,5 +1,4 @@
 import {Route, Routes} from "react-router-dom";
-import NavBar from "./components/common/NavBar";
 import Home from "./components/common/Home";
 import CardList from "./components/features/CardList";
 import DeleteCardByNumber from "./components/features/DeleteCardByNumber";
@@ -12,7 +11,6 @@ export default function App() {
 
     return (
         <div className="App">
-            <NavBar/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/cardList" element={<CardList/>}/>
