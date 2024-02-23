@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import {DataGrid} from "@mui/x-data-grid";
+import {Link} from "react-router-dom";
+import {Button} from "@mui/material";
 
 const CardList = () => {
     const [rows, setRows] = useState([]);
@@ -32,7 +34,21 @@ const CardList = () => {
 
     return (
         <div className="CardList">
-            <DataGrid columns={columns} rows={rows}/>
+            <DataGrid
+                columns={columns}
+                rows={rows}
+                sx={{marginTop: "80px"}}
+                pageSizeOptions={[3, 5, 10]}
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 3
+                        },
+                    },
+                }}/>
+            <Link to="/">
+                <Button variant="contained" sx={{marginTop: "10px"}}>Retour a l'accueil</Button>
+            </Link>
         </div>
     );
 }
