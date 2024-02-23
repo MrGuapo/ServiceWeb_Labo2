@@ -4,6 +4,7 @@ import {Button, Container, FormControl, Input, InputLabel, Typography} from "@mu
 import DeleteIcon from "@mui/icons-material/Delete";
 import {Link} from "react-router-dom";
 import NavBar from "../common/NavBar";
+import HomeButton from "../common/HomeButton";
 
 const DeleteCardByNumber = () => {
     const [cardNumber, setCardNumber] = useState("");
@@ -37,7 +38,8 @@ const DeleteCardByNumber = () => {
                     <InputLabel htmlFor="cardNumber">Numero de carte</InputLabel>
                     <Input type="text" value={cardNumber} onChange={handleInputChange}/>
                     {isDeleted ? (
-                        <Typography sx={{color: "green"}}>La carte avec le numéro {cardNumber} a été supprimée avec succès!</Typography>
+                        <Typography sx={{color: "green"}}>La carte avec le numéro {cardNumber} a été supprimée avec
+                            succès!</Typography>
                     ) : (
                         <Button onClick={deleteCard} variant="contained" startIcon={<DeleteIcon/>}
                                 style={{marginTop: "5px"}}>
@@ -46,11 +48,7 @@ const DeleteCardByNumber = () => {
                     )}
                 </FormControl>
             </Container>
-            <div style={{alignSelf: "flex-end", marginRight: "10px", marginBottom: "10px"}}>
-                <Link to="/">
-                    <Button variant="contained">Retour a l'accueil</Button>
-                </Link>
-            </div>
+            <HomeButton/>
         </div>
     );
 };
