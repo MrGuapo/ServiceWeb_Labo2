@@ -1,13 +1,13 @@
 import {AppBar, Box, Toolbar, Typography} from "@mui/material";
 
-const NavBar = () => {
+const NavBar = ({text}) => {
     return (
         <div className="NavBar">
             <AppBar position="fixed">
                 <Box sx={{display: "flex", justifyContent: "center"}}>
                     <Toolbar>
                         <Typography variant="h6" component="div">
-                            Interface Utilisateur : Gestion de cartes
+                            Interface Utilisateur : {text}
                         </Typography>
                     </Toolbar>
                 </Box>

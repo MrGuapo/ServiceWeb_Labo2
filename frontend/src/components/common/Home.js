@@ -1,10 +1,11 @@
 import {AppBar, Box, Button, ButtonGroup, Container, Grid, Toolbar, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
+import NavBar from "./NavBar";
 
 const Home = () => {
     return (
         <div className="Home">
-
+            <NavBar text="Gestion de cartes"/>
             <Container sx={{marginTop: "80px"}}>
                 <ButtonGroup>
                     <Link to="/cardList">

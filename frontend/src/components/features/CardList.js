@@ -3,6 +3,7 @@ import axios from "axios";
 import {DataGrid} from "@mui/x-data-grid";
 import {Link} from "react-router-dom";
 import {Button} from "@mui/material";
+import NavBar from "../common/NavBar";
 
 const CardList = () => {
     const [rows, setRows] = useState([]);
@@ -34,6 +35,7 @@ const CardList = () => {
 
     return (
         <div className="CardList">
+            <NavBar text="Afficher toutes les cartes"/>
             <DataGrid
                 columns={columns}
                 rows={rows}
