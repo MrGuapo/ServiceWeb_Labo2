@@ -8,12 +8,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "Cards")
+@Table(name = "Cards", uniqueConstraints = {@UniqueConstraint(columnNames = {"card_id"})})
 @Data
 public class Cards {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_id")
     private int cardId;
 
