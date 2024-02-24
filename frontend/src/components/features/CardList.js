@@ -43,6 +43,7 @@ const CardList = () => {
                     pageSizeOptions={[5, 15, 30]}
                     autoHeight
                     disableColumnMenu
+                    rowSelection={false}
                     initialState={{
                         pagination: {
                             paginationModel: {

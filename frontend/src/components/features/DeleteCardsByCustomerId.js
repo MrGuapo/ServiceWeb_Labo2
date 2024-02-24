@@ -22,13 +22,14 @@ const DeleteCardsByCustomerId = () => {
     return (
         <div className="DeleteCardsByCustomerId" style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
             <NavBar text="Supprimer des cartes par ID Client"/>
-            <Container style={{
-                flex: "1",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
+            <Container
+                style={{
+                    flex: "1",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
                 <FormControl variant="standard" style={{width: "300px", textAlign: "center"}}>
                     <InputLabel htmlFor="cardNumber">ID du Client</InputLabel>
                     <Input type="text" value={customerId} onChange={handleInputChange}/>
@@ -37,8 +38,11 @@ const DeleteCardsByCustomerId = () => {
                             Les cartes avec le ID client " {customerId} " ont été supprimées avec succès!
                         </Typography>
                     ) : (
-                        <Button onClick={deleteCards} variant="contained" startIcon={<DeleteIcon/>}
-                                style={{marginTop: "5px"}}>
+                        <Button
+                            onClick={deleteCards}
+                            variant="contained"
+                            startIcon={<DeleteIcon/>}
+                            style={{marginTop: "5px"}}>
                             Supprimer cartes
                         </Button>
                     )}

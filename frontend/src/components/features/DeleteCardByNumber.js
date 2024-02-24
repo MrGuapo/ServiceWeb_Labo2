@@ -21,22 +21,27 @@ const DeleteCardByNumber = () => {
     return (
         <div className="DeleteCardByNumber" style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
             <NavBar text="Supprimer une carte par son numero"/>
-            <Container style={{
-                flex: "1",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
+            <Container
+                style={{
+                    flex: "1",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
                 <FormControl variant="standard" style={{width: "300px", textAlign: "center"}}>
                     <InputLabel htmlFor="cardNumber">Numéro de carte</InputLabel>
                     <Input type="text" value={cardNumber} onChange={handleInputChange}/>
                     {isDeleted ? (
-                        <Typography sx={{color: "green"}}>La carte avec le numéro {cardNumber} a été supprimée avec
-                            succès!</Typography>
+                        <Typography sx={{color: "green"}}>
+                            La carte avec le numéro " {cardNumber} " a été supprimée avec succès!
+                        </Typography>
                     ) : (
-                        <Button onClick={deleteCard} variant="contained" startIcon={<DeleteIcon/>}
-                                style={{marginTop: "5px"}}>
+                        <Button
+                            onClick={deleteCard}
+                            variant="contained"
+                            startIcon={<DeleteIcon/>}
+                            style={{marginTop: "5px"}}>
                             Supprimer carte
                         </Button>
                     )}
