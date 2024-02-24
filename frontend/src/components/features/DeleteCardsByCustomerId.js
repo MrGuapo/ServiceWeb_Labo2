@@ -21,7 +21,7 @@ const DeleteCardsByCustomerId = () => {
 
     return (
         <div className="DeleteCardsByCustomerId" style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
-            <NavBar text="Supprimer des cartes par ID Client"/>
+            <NavBar text="Supprimer des cartes par leur ID Client"/>
             <Container
                 style={{
                     flex: "1",

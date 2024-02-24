@@ -12,16 +12,16 @@ const Home = () => {
                         <Button>Afficher toutes les cartes</Button>
                     </Link>
                     <Link to="/deleteCardByNumber">
-                        <Button>Supprimer une carte par numero</Button>
+                        <Button>Supprimer une carte par son numéro</Button>
                     </Link>
                     <Link to="/deleteCardByCustomerId">
-                        <Button>Supprimer des cartes par ID Client</Button>
+                        <Button>Supprimer des cartes par leur ID Client</Button>
                     </Link>
                     <Link to="/updateCardLimit">
-                        <Button>Mettre a jour limite d'une carte</Button>
+                        <Button>Mettre à jour la limite d'une carte</Button>
                     </Link>
                     <Link to="getCardsByType">
-                        <Button>Rechercher cartes par type</Button>
+                        <Button>Rechercher les cartes par type</Button>
                     </Link>
                     <Link to="addCard">
                         <Button>Ajouter une nouvelle carte</Button>
