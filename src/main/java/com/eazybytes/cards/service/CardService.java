@@ -106,6 +106,7 @@ public class CardService {
 
             if (cardFind != null) {
                 cardFind.setTotalLimit(newCardLimit);
+                cardFind.setAvailableAmount(newCardLimit - cardFind.getAmountUsed());
                 cardsRepository.save(cardFind);
                 return ResponseEntity.status(HttpStatus.OK).body("Mise à jour réussie");
             } else {

@@ -1,6 +1,6 @@
 import {useState} from "react";
 import axios from "axios";
-import {Button, Container, FormControl, TextField, Typography} from "@mui/material";
+import {Alert, Button, Container, Fade, FormControl, TextField, Typography} from "@mui/material";
 import NavBar from "../common/NavBar";
 import HomeButton from "../common/HomeButton";
 import UpgradeIcon from '@mui/icons-material/Upgrade';
@@ -8,7 +8,8 @@ import UpgradeIcon from '@mui/icons-material/Upgrade';
 const UpdateCardLimit = () => {
     const [cardId, setCardId] = useState("");
     const [newLimit, setNewLimit] = useState("");
-    const [isUpdated, setIsUpdated] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -23,9 +24,22 @@ const UpdateCardLimit = () => {
         try {
             await axios.put(`updateCardLimit/${cardId}`, parseInt(newLimit),
                 {headers: {'Content-Type': 'application/json'}});
-            setIsUpdated(true);
-        } catch (error) {
-            console.error("Error updating card limit:", error);
+            setCardId("");
+            setNewLimit("");
+            setSuccessMessage(`La limite de la carte avec le ID " ${cardId} " a été mise à jour avec succès!`);
+            setTimeout(() => {
+                setSuccessMessage("");
+            }, 5000);
+        } catch (e) {
+            if (e.response && e.response.status === 404) {
+                setErrorMessage("Ce Card ID n'existe pas.");
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, 5000);
+            } else {
+                console.error(
+                    "Une erreur s'est produite lors de la modification de la carte : ", e);
+            }
         }
     };
 
@@ -70,10 +84,19 @@ const UpdateCardLimit = () => {
                     >
                         Mettre à jour la limite
                     </Button>
-                    {isUpdated && (
-                        <Typography sx={{color: "green", marginTop: "10px"}}>
-                            La limite de la carte avec le ID " {cardId} " a été mise à jour avec succès!
-                        </Typography>
+                    {successMessage && (
+                        <Fade in={true} timeout={1000}>
+                            <Alert sx={{marginTop: "10px"}}>
+                                {successMessage}
+                            </Alert>
+                        </Fade>
+                    )}
+                    {errorMessage && (
+                        <Fade in={true} timeout={1000}>
+                            <Alert severity="error" sx={{marginTop: "10px"}}>
+                                {errorMessage}
+                            </Alert>
+                        </Fade>
                     )}
                 </FormControl>
             </Container>

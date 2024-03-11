@@ -1,53 +1,67 @@
 import {useState} from "react";
 import axios from "axios";
-import {Button, Container, FormControl, TextField, Typography} from "@mui/material";
+import {Alert, Button, Container, Fade, FormControl, TextField, Typography} from "@mui/material";
 import NavBar from "../common/NavBar";
 import HomeButton from "../common/HomeButton";
 import AddIcon from '@mui/icons-material/Add';
 
 const AddCard = () => {
     const [customerId, setCustomerId] = useState("");
-    const [cardNumber, setCardNumber] = useState("");
     const [cardType, setCardType] = useState("");
     const [totalLimit, setTotalLimit] = useState("");
-    const [amountUsed, setAmountUsed] = useState("");
-    const [availableAmount, setAvailableAmount] = useState("");
-    const [createDt, setCreateDt] = useState("");
-    const [isCreated, setIsCreated] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const date = `${year}-${month}-${day}`;
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
         if (name === "customerId") {
             setCustomerId(value);
-        } else if (name === "cardNumber") {
-            setCardNumber(value);
         } else if (name === "cardType") {
             setCardType(value);
         } else if (name === "totalLimit") {
             setTotalLimit(value);
-        } else if (name === "amountUsed") {
-            setAmountUsed(value);
-        } else if (name === "availableAmount") {
-            setAvailableAmount(value);
-        } else if (name === "createDt") {
-            setCreateDt(value);
         }
     };
 
     const createCard = async () => {
         try {
+            if (!customerId || !cardType || !totalLimit) {
+                setErrorMessage("Merci de remplir tous les champs.");
+                setTimeout(() => {
+                    setErrorMessage("");
+                }, 5000);
+                return;
+            }
+
+            const randomCardNumber = Math.floor(1000000000000000 + Math.random() * 9000000000000000);
             await axios.post(`newCard`, {
                 customerId,
-                cardNumber,
+                cardNumber: randomCardNumber,
                 cardType,
                 totalLimit,
-                amountUsed,
-                availableAmount,
-                createDt
+                amountUsed: "0",
+                availableAmount: totalLimit,
+                date
             });
-            setIsCreated(true);
+            setCustomerId("");
+            setCardType("");
+            setTotalLimit("");
+            setSuccessMessage("La carte a été créée avec succès!");
+            setTimeout(() => {
+                setSuccessMessage("");
+            }, 5000);
         } catch (error) {
             console.error("Error creating card:", error);
+            setErrorMessage("Une erreur s'est produite lors de la création de la carte. Veuillez réessayer.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
         }
     };
 
@@ -75,16 +89,6 @@ const AddCard = () => {
                         fullWidth
                     />
                     <TextField
-                        id="cardNumber"
-                        name="cardNumber"
-                        label="Card Number"
-                        value={cardNumber}
-                        onChange={handleInputChange}
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                    />
-                    <TextField
                         id="cardType"
                         name="cardType"
                         label="Card Type"
@@ -104,36 +108,6 @@ const AddCard = () => {
                         margin="normal"
                         fullWidth
                     />
-                    <TextField
-                        id="amountUsed"
-                        name="amountUsed"
-                        label="Amount Used"
-                        value={amountUsed}
-                        onChange={handleInputChange}
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                    />
-                    <TextField
-                        id="availableAmount"
-                        name="availableAmount"
-                        label="Available Amount"
-                        value={availableAmount}
-                        onChange={handleInputChange}
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                    />
-                    <TextField
-                        id="createDt"
-                        name="createDt"
-                        label="Create Date"
-                        value={createDt}
-                        onChange={handleInputChange}
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                    />
                     <Button
                         onClick={createCard}
                         variant="contained"
@@ -142,10 +116,19 @@ const AddCard = () => {
                     >
                         Créer une carte
                     </Button>
-                    {isCreated && (
-                        <Typography sx={{color: "green", marginTop: "10px"}}>
-                            La carte a été créée avec succès!
-                        </Typography>
+                    {successMessage && (
+                        <Fade in={true} timeout={1000}>
+                            <Alert sx={{marginTop: "10px"}}>
+                                {successMessage}
+                            </Alert>
+                        </Fade>
+                    )}
+                    {errorMessage && (
+                        <Fade in={true} timeout={1000}>
+                            <Alert severity="error" sx={{marginTop: "10px"}}>
+                                {errorMessage}
+                            </Alert>
+                        </Fade>
                     )}
                 </FormControl>
             </Container>

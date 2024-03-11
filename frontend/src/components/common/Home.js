@@ -7,7 +7,7 @@ const Home = () => {
         <div className="Home">
             <NavBar text="Gestion de cartes"/>
             <Container sx={{marginTop: "80px"}}>
-                <ButtonGroup>
+                <ButtonGroup sx={{width: "1000px"}}>
                     <Link to="/cardList">
                         <Button>Afficher toutes les cartes</Button>
                     </Link>
