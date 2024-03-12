@@ -26,8 +26,16 @@ const GetCardsByType = () => {
     }, [cardType]);
 
     const handleInputChange = (e) => {
-        setCardType(e.target.value);
+        const inputValue = e.target.value.toLowerCase();
+        if (inputValue === "credit" || inputValue === "crédit") {
+            setCardType("Crédit");
+        } else if (inputValue === "debit" || inputValue === "débit") {
+            setCardType("Débit");
+        } else {
+            setCardType(inputValue);
+        }
     };
+
 
     const handleReset = () => {
         setCardType("");
@@ -35,14 +43,14 @@ const GetCardsByType = () => {
     };
 
     const columns = [
-        {field: "cardId", headerName: "Card Id", flex: 1},
-        {field: "customerId", headerName: "Customer Id", flex: 1},
-        {field: "cardNumber", headerName: "Card Number", flex: 1},
-        {field: "cardType", headerName: "Card Type", flex: 1},
-        {field: "totalLimit", headerName: "Total Limit", flex: 1},
-        {field: "amountUsed", headerName: "Amount Used", flex: 1},
-        {field: "availableAmount", headerName: "Available Amount", flex: 1},
-        {field: "createDt", headerName: "Create Date", flex: 1}
+        {field: "cardId", headerName: "ID Carte", flex: 1},
+        {field: "customerId", headerName: "ID Client", flex: 1},
+        {field: "cardNumber", headerName: "Numéro Carte", flex: 1},
+        {field: "cardType", headerName: "Type Carte", flex: 1},
+        {field: "totalLimit", headerName: "Limite Totale", flex: 1},
+        {field: "amountUsed", headerName: "Montant Utilisé", flex: 1},
+        {field: "availableAmount", headerName: "Montant Disponible", flex: 1},
+        {field: "createDt", headerName: "Date Création", flex: 1}
     ];
 
     return (

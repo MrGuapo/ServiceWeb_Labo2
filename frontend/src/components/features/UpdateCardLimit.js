@@ -21,6 +21,13 @@ const UpdateCardLimit = () => {
     };
 
     const updateCard = async () => {
+        if (!cardId || !newLimit) {
+            setErrorMessage("Veuillez entrer à la fois l'ID de la carte et la nouvelle limite.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
+            return;
+        }
         try {
             await axios.put(`updateCardLimit/${cardId}`, parseInt(newLimit),
                 {headers: {'Content-Type': 'application/json'}});

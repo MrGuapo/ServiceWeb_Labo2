@@ -102,8 +102,8 @@ const AddCard = () => {
                         <MenuItem value="" disabled>
                             Type de carte
                         </MenuItem>
-                        <MenuItem value="Debit">Débit</MenuItem>
-                        <MenuItem value="Credit">Crédit</MenuItem>
+                        <MenuItem value="Débit">Débit</MenuItem>
+                        <MenuItem value="Crédit">Crédit</MenuItem>
                     </Select>
                     <TextField
                         id="totalLimit"

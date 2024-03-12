@@ -11,6 +11,13 @@ const DeleteCardsByCustomerId = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const deleteCards = async () => {
+        if (!customerId) {
+            setErrorMessage("Veuillez entrer un ID client.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
+            return;
+        }
         try {
             await axios.delete(`deleteCardsByCustomerId/${customerId}`);
             setCustomerId("");
@@ -29,7 +36,6 @@ const DeleteCardsByCustomerId = () => {
                     "Une erreur s'est produite lors de la suppression de la carte : ", e);
             }
         }
-
     };
 
     const handleInputChange = (e) => {

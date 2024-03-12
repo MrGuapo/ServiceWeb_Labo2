@@ -18,6 +18,13 @@ const DeleteCardByNumber = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const deleteCard = async () => {
+        if (!cardNumber) {
+            setErrorMessage("Veuillez entrer un numéro de carte.");
+            setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
+            return;
+        }
         try {
             await axios.delete(`deleteCardByNumber/${cardNumber}`);
             setCardNumber("");
