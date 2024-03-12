@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
-import {DataGrid} from "@mui/x-data-grid";
-import {Container} from "@mui/material";
+import {DataGrid, frFR} from "@mui/x-data-grid";
+import {Container, createTheme, ThemeProvider} from "@mui/material";
 import NavBar from "../common/NavBar";
 import HomeButton from "../common/HomeButton";
 
@@ -23,35 +23,41 @@ const CardList = () => {
     }, []);
 
     const columns = [
-        {field: "cardId", headerName: "Card Id", flex: 1},
-        {field: "customerId", headerName: "Customer Id", flex: 1},
-        {field: "cardNumber", headerName: "Card Number", flex: 1},
-        {field: "cardType", headerName: "Card Type", flex: 1},
-        {field: "totalLimit", headerName: "Total Limit", flex: 1},
-        {field: "amountUsed", headerName: "Amount Used", flex: 1},
-        {field: "availableAmount", headerName: "Available Amount", flex: 1},
-        {field: "createDt", headerName: "Create Date", flex: 1}
+        {field: "cardId", headerName: "ID Carte", flex: 1},
+        {field: "customerId", headerName: "ID Client", flex: 1},
+        {field: "cardNumber", headerName: "Numéro Carte", flex: 1},
+        {field: "cardType", headerName: "Type Carte", flex: 1},
+        {field: "totalLimit", headerName: "Limite Totale", flex: 1},
+        {field: "amountUsed", headerName: "Montant Utilisé", flex: 1},
+        {field: "availableAmount", headerName: "Montant Disponible", flex: 1},
+        {field: "createDt", headerName: "Date Création", flex: 1}
     ];
+
+    const theme = createTheme(
+        frFR
+    );
 
     return (
         <div className="CardList" style={{display: "grid", placeItems: "center", minHeight: "100vh"}}>
             <NavBar text="Afficher toutes les cartes"/>
             <Container style={{width: "100%", height: "100%"}}>
-                <DataGrid
-                    columns={columns}
-                    rows={rows}
-                    pageSizeOptions={[5, 15, 30]}
-                    autoHeight
-                    disableColumnMenu
-                    rowSelection={false}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5
+                <ThemeProvider theme={theme}>
+                    <DataGrid
+                        columns={columns}
+                        rows={rows}
+                        pageSizeOptions={[5, 15, 30]}
+                        autoHeight
+                        disableColumnMenu
+                        rowSelection={false}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 5
+                                },
                             },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </ThemeProvider>
             </Container>
             <HomeButton/>
         </div>

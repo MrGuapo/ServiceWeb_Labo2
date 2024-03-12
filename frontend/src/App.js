@@ -8,7 +8,6 @@ import GetCardsByType from "./components/features/GetCardsByType";
 import AddCard from "./components/features/AddCard";
 
 export default function App() {
-
     return (
         <div className="App">
             <Routes>

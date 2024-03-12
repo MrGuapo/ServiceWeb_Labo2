@@ -1,6 +1,6 @@
 import {useState} from "react";
 import axios from "axios";
-import {Alert, Button, Container, Fade, FormControl, TextField} from "@mui/material";
+import {Alert, Button, Container, Fade, FormControl, MenuItem, Select, TextField} from "@mui/material";
 import NavBar from "../common/NavBar";
 import HomeButton from "../common/HomeButton";
 import AddIcon from '@mui/icons-material/Add';
@@ -22,11 +22,13 @@ const AddCard = () => {
         const {name, value} = e.target;
         if (name === "customerId") {
             setCustomerId(value);
-        } else if (name === "cardType") {
-            setCardType(value);
         } else if (name === "totalLimit") {
             setTotalLimit(value);
         }
+    };
+
+    const handleCardTypeChange = (e) => {
+        setCardType(e.target.value);
     };
 
     const createCard = async () => {
@@ -81,27 +83,32 @@ const AddCard = () => {
                     <TextField
                         id="customerId"
                         name="customerId"
-                        label="Customer ID"
+                        label="ID Client"
                         value={customerId}
                         onChange={handleInputChange}
                         variant="outlined"
                         margin="normal"
                         fullWidth
                     />
-                    <TextField
+                    <Select
                         id="cardType"
-                        name="cardType"
-                        label="Card Type"
                         value={cardType}
-                        onChange={handleInputChange}
+                        onChange={handleCardTypeChange}
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                    />
+                        displayEmpty
+                    >
+                        <MenuItem value="" disabled>
+                            Type de carte
+                        </MenuItem>
+                        <MenuItem value="Debit">Débit</MenuItem>
+                        <MenuItem value="Credit">Crédit</MenuItem>
+                    </Select>
                     <TextField
                         id="totalLimit"
                         name="totalLimit"
-                        label="Total Limit"
+                        label="Limite Totale"
                         value={totalLimit}
                         onChange={handleInputChange}
                         variant="outlined"
